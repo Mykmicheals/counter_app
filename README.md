@@ -1,70 +1,175 @@
-# Getting Started with Create React App
+In this tutorial we are going to learn how to implement react useState hook. We would be building a counter app to help us understand how to better use the useState hook.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The React useState Hook allows us to track state in a function component. It enables you to add state to functional components. Calling React.useState inside a function component generates a single piece of state associated with that component. This state can now be passed into another component as props
+The useState Hook allows you to declare only one state variable (of any type) at a time.
 
-## Available Scripts
+State generally refers to data or properties that need to be tracked in an application.The state is where you store property values or data  that belongs to the component.
 
-In the project directory, you can run:
+We can manage state in both class and functional components in react, but in this tutorial we'll be concentrating on functional components.
 
-### `npm start`
+## Declaring state in react
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+``` import React, { useState } from 'react'; ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## syntax
+The first element is the initial state and the second one is a function that is used for updating the state.
 
-### `npm test`
+```  const [state, setState] = useState(initialstate) ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Creating React Application:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### step 1: Create react app using the following command:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+``` npx create-react-app counter_app ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+for a detailed explanation on how to create react app visit [here](https://mic.hashnode.dev/how-to-create-react-app)
 
-### `npm run eject`
+after creating the react app navigate to the app.js file and create a counter state to store your initial counter value
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+function App() {
+    const [counter, setCounter] = useState(0)
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+in the above code snippet, the counter variable is used to hold our value, while the setCounter is a function, we are going to call to increment or decrement the value of the counter.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Return the counter value
 
-## Learn More
+```
+import React, { useState } from "react";
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+function App() {
+  const [counter, setCounter] = useState(0)
+  return (
+    <div className="counter">
+      <h1>{counter}</h1> // pass the counter variable here
+    </div>
+  );
+}
 
-### Code Splitting
+export default App;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
 
-### Analyzing the Bundle Size
+### start your server using
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+``` npm start ```
 
-### Making a Progressive Web App
+### In your browser go to your localhost 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+![counter.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1663362000618/AcHIGSnCB.png align="left")
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Create a function to increment the counter 
 
-### `npm run build` fails to minify
+```
+function App() {
+  const [counter, setCounter] = useState(0)
+  function incrementCounter() {
+    setCounter(counter + 1)
+  }
+  return (
+    <div className="counter">
+      <h1>{counter}</h1>
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+
+In the incrementCounter function, we add 1 to the counter value each time we call it.
+
+### Create a button to implement the increment counter function
+
+
+```
+function App() {
+  const [counter, setCounter] = useState(0)
+  function incrementCounter() {
+    setCounter(counter + 1)
+  }
+  return (
+    <div className="counter">
+      <h1>{counter}</h1>
+      <button onClick={incrementCounter}>Increment</button>
+    </div>
+  );
+}
+
+```
+In the code snippet above we added a button with an onClick listner ( to listen for clicks on the button )
+Whenever the button is clicked out counter would increase by 1
+
+
+![ezgif.com-gif-maker.gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1663362931054/kl9W9A3eE.gif align="left")
+
+### Create another function to decrement the value
+
+```
+function App() {
+  const [counter, setCounter] = useState(0)
+  function incrementCounter() {
+    setCounter(counter + 1)
+  }
+
+  function decrementCounter() {
+    setCounter(counter - 1)
+  }
+
+  return (
+    <div className="counter">
+      <h1>{counter}</h1>
+      <button onClick={incrementCounter}>Increment</button>
+      <button onClick={decrementCounter}>Decrement</button>
+    </div>
+  );
+}
+```
+
+We created a function to decrease the our counter value, after creating the function, we also created a button that would handle our decrementCounter function.
+
+If we click on our decrement counter button, our counter value would decrease.
+
+![ezgif.com-gif-maker (1).gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1663364462439/48tHUI8Hk.gif align="left")
+
+We can disable the decrement button, so users are not allowed to decrement when the counter value is 0
+
+```
+function App() {
+  const [counter, setCounter] = useState(0)
+  function incrementCounter() {
+    setCounter(counter + 1)
+  }
+
+  function decrementCounter() {
+    setCounter(counter - 1)
+  }
+
+  return (
+    <div className="counter">
+      <h1>{counter}</h1>
+      <button onClick={incrementCounter}>Increment</button>
+      <button disabled={counter == 0} onClick={decrementCounter}>Decrement</button>
+    </div>
+  );
+
+```
+using the html property we simply disable ( prevent users from clicking ) the button when the counter value is 0
+
+That's all for our basic counter app, with react useState hook
+
+### Rules for using ``` useState ```
+
+- Only call Hooks at the top level
+- Only call Hooks from React functions
+
+## Conclusion
+
+useState is a Hook (function) that allows you to have state variables (to store data or values) in functional components. You pass the initial state to this function and it returns a variable with the current state value (not necessarily the initial state) and another function to update this value.
+
